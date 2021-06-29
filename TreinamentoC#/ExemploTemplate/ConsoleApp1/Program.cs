@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace ConsoleApp1
             Dia1();
             Dia2();
             Dia3();
+            Dia4();
         }
 
         private static void Dia1()
@@ -304,6 +306,68 @@ namespace ConsoleApp1
             evento("arroz", 5);
 
         }
+
+        private static void Dia4()
+        {
+            // Exemplo construtor de classes.
+            var professor = new Professor();
+            var professor2 = new Professor(new DateTime(1990, 1, 1));
+
+
+            // Exemplo tipo referencia.
+            var professor3 = new Professor();
+            professor3.Nome = "Girafales";
+            var professor4 = professor3;
+            professor4.Nome = "Salsicha";
+            Console.WriteLine($"O nome do professor3 é {professor3.Nome} e o nome do professor4 é {professor4.Nome}");
+
+
+            // Exemplo construtor de classes usando static em um membro interno.
+            var professor5 = new Professor(new DateTime(1995, 5, 10));
+            var professor6 = new Professor(new DateTime(1999, 10, 30));
+
+            Console.WriteLine($"A idade estática do professor é {professor2.Idade}");
+
+            Professor.DarAula();
+
+            //Usando Interfaces
+            IPessoa pessoa = new Professor() { Nome = "José" };
+            pessoa.Escrever("Treinamento legal!");
+            pessoa.Andar();
+
+            pessoa = new Aluno() { Nome = "Eloá" };
+            pessoa.Escrever("Treinamento legal!");
+            pessoa.Andar();
+
+
+            //Classes Tipadas Genéricas
+            var listaCustomizadaAlunos = new ListaCustomizada<Aluno>();
+            listaCustomizadaAlunos.Add(new Aluno());
+
+            var listaCustomizadaProfessores = new ListaCustomizada<Professor>();
+            listaCustomizadaProfessores.Add(new Professor());
+
+
+            //IDictionary
+            IDictionary<string, Aluno> alunos = new SortedDictionary<string, Aluno>();
+            alunos.Add("Zezinho", new Aluno() { Nome = "Zezinho" });
+            alunos.Add("Abreu", new Aluno() { Nome = "Abreu" });
+            alunos.Add("João2", new Aluno() { Nome = "João2" });
+            alunos.Add("João1", new Aluno() { Nome = "João1" });
+            alunos.Add("Marlene", new Aluno() { Nome = "Marlene" });
+
+            foreach (var aluno in alunos)
+            {
+                Console.WriteLine($"Nome do aluno é {aluno.Value.Nome}, e nome da chave é {aluno.Key}");
+            }
+
+            var primeiroAluno = new Aluno() { Nome = "João" };
+            var quantidadeFaltas = new Dictionary<Aluno, int>();
+            quantidadeFaltas.Add(primeiroAluno, 2);
+            quantidadeFaltas.Add(new Aluno() { Nome = "Maria" }, 4);
+            
+        }
+
 
         private static void TratarComida(string nomeComida, int quantidadeDisponivel)
         {

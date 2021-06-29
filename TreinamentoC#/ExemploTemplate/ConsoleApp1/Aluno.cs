@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ConsoleApp1.Alunos
 {
-    public class Aluno
+    public class Aluno : IPessoa
     {
         public string Nome { get; set; }
 
@@ -15,7 +15,18 @@ namespace ConsoleApp1.Alunos
         public DiaSemana DiaNatacao { get; set; }
 
         public DadosFisico DadosFisicosAluno { get; set; }
- 
+
+        public void Andar()
+        {
+            Console.WriteLine($"Aluno {Nome} andou!");
+        }
+
+        public string Escrever(string texto)
+        {
+            var textoFinal = $"Aluno {Nome} escreveu o seguinte texto {texto}!";
+            Console.WriteLine(textoFinal);
+            return textoFinal;
+        }
     }
 
 

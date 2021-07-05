@@ -1,0 +1,58 @@
+﻿@model IEnumerable<CRUD_Vacinas.Models.VacinaViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Criar">Criar novo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NOME)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FABRICANTE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NUMDOSES)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.INTERVALODOSE)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NOME)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FABRICANTE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NUMDOSES)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.INTERVALODOSE)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Editar", new {  id = item.ID  }) |
+                @Html.ActionLink("Deletar", "Deletar", new { id = item.ID })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

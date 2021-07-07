@@ -19,5 +19,8 @@ namespace CRUD_Vacinas.Models
         public int Populacao;
 
         public Estado NomeEstado;
+
+        public DateTime Aniversario;
+
     }
 }

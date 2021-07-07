@@ -21,5 +21,7 @@ namespace CRUD_Vacinas.Models
 
         public int Populacao;
         public DateTime Fundacao;
+
+        public List<Cidade> Cidades;
     }
 }

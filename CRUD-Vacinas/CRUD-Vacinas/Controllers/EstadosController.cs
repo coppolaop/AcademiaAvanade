@@ -52,36 +52,66 @@ namespace CRUD_Vacinas.Controllers
         // POST: /Estados/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Estado estado)
         {
             try
             {
+                Estado novoEstado = new Estado();
+                novoEstado.Nome = estado.Nome;
+                novoEstado.Sigla = estado.Sigla;
+                novoEstado.Populacao = estado.Populacao;
+                _vacinaContext.Add<Estado>(novoEstado);
+                _vacinaContext.SaveChanges();
+
+
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                return View(estado);
             }
         }
 
         // GET: /Estados/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var _estado = _vacinaContext.Estados.Find(id);
+
+            if (_estado == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(_estado);
+
         }
 
         // POST: /Estados/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Estado estado)
         {
             try
             {
+                var _estado = _vacinaContext.Estados.Find(id);
+
+                if(_estado != null)
+                {
+                    _estado.Populacao = estado.Populacao;
+                    _estado.Fundacao = estado.Fundacao;
+
+                    _vacinaContext.Estados.Update(_estado);
+                    _vacinaContext.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception("Estado não cadastrado");
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                return View(estado);
             }
         }
 
@@ -90,26 +120,36 @@ namespace CRUD_Vacinas.Controllers
         {
             var estado = _vacinaContext.Estados.Find(id);
 
-            _vacinaContext.Remove<Estado>(estado);
-
-            _vacinaContext.SaveChanges();
-
-            return View();
+            return View(estado);
         }
 
         // POST: /Estados/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, Estado estado)
         {
             try
             {
+                var _estado = _vacinaContext.Estados.Find(id);
+
+                if (_estado != null)
+                {
+                    _vacinaContext.Remove<Estado>(_estado);
+                    _vacinaContext.SaveChanges();
+
+                }
+                else
+                {
+                    throw new Exception("Estado não cadastrado");
+                }
+
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                return View(estado);
             }
         }
+
     }
 }

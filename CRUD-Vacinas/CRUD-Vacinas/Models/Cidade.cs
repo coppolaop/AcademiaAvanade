@@ -10,17 +10,19 @@ namespace CRUD_Vacinas.Models
     public class Cidade
     {
         [Key]
-        public int CodCidade;
+        public int CodCidade { get; set; }
 
         [Required]
         [StringLength(33)]
-        public string Nome;
+        public string Nome { get; set; }
 
-        public int Populacao;
+        public int Populacao { get; set; }
 
-        public Estado NomeEstado;
+        public Estado NomeEstado { get; set; }
 
-        public DateTime Aniversario;
+        public DateTime Aniversario { get; set; }
+
+        public int QuantidadeBairros { get; set; }
 
     }
 }

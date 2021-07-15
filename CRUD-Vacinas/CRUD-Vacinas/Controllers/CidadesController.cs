@@ -1,4 +1,5 @@
 ﻿using CRUD_Vacinas.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -46,6 +47,7 @@ namespace CRUD_Vacinas.Controllers
 
         [HttpPost("")]
         [ProducesResponseType(200)]
+        [Authorize(Roles = "operador")]
         public IActionResult Post(Cidade cidade)
         {
             List<Cidade> cidades = ObterColecaoCidades();
@@ -58,6 +60,7 @@ namespace CRUD_Vacinas.Controllers
         [HttpDelete("")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
+        [Authorize(Roles = "admin")]
         public IActionResult Delete(int codCidade)
         {
             List<Cidade> cidades = ObterColecaoCidades();
@@ -74,6 +77,8 @@ namespace CRUD_Vacinas.Controllers
         [HttpPut("")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
+        [Authorize(Roles = "operador")]
+
         public IActionResult Update(Cidade cidade)
         {
             List<Cidade> cidades = ObterColecaoCidades();
